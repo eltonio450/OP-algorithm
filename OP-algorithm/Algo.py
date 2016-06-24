@@ -4,7 +4,7 @@ class Algo(object):
     """description of class"""
 
 
-    def set_parameters(self, generator, initial_state_vale, n_iterations, fixed_value_lb, gamma, optimized = False):
+    def set_parameters(self, generator, initial_state_vale, n_iterations, gamma, optimized = False):
         self.gamma = gamma
         self.generator = generator
         self.initial_state = State_Node(initial_state_value, 0)
@@ -43,7 +43,7 @@ class Algo(object):
                 root.ub = ub
                 root.optimistic_action = action
             if lb > root.lb:
-                root.b = val
+                root.lb = lb
                 root.secure_action = action
 
     def select_leaf_to_expand(self, leaves_list):
@@ -60,6 +60,7 @@ class Algo(object):
         for action in self.generator.get_actions(leaf):
             for state in self.generator.get_next_states(action):
                 state.ub = leaf.ub + self.gamma**state[0].depth*state[2]
+                state.lb = 0
 
     def update_b_value_upwards(self, starting_point):
         self.update_bounds_and_policy(starting_point)
