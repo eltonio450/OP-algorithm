@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "OP-algorithm", "OP-algorithm\OP-Algorithm.pyproj", "{9368BF65-29FE-44D8-8A72-CE347A2F5E4F}"
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "OP-Algorithm", "OP-algorithm\OP-Algorithm.pyproj", "{9368BF65-29FE-44D8-8A72-CE347A2F5E4F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
