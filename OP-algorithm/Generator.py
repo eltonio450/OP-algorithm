@@ -2,6 +2,9 @@ from Node import *
 
 class Generator(object):
 
+    def __init__(self):
+        self.generated_states = {}
+
     def generate_actions_values(self, state_value):
         raise Exception("Function generate_children_values(self, state_value, action_value) has not been specified. Please use 'Generator::set_generate_actions_function(f)' to specify.")
 
@@ -36,8 +39,15 @@ class Generator(object):
             state_node.__possible_actions__.append(Action_Node(action_value, state_node, state_node.depth))
 
     def generate_children(self, action_node):
-        for child in self.generate_children_values(action_node.state_node.state, self.denormalize(action_node.action)):
-            action_node.__children_nodes__.append([State_Node(child[0], action_node.depth+1, action_node), child[1], self.normalize(child[2])])
+        for child in self.generate_children_values(action_node.parent_node.state, self.denormalize(action_node.action)):
+            ns = State_Node(child[0], action_node.depth+1)
+            if ns.get_key() in self.generated_states.keys():
+                ns = self.generated_states[ns.get_key()]
+            else:
+                self.generated_states[ns.get_key()] = ns
+            if action_node.parent_node.get_key() not in ns.parent_nodes.keys():
+                ns.parent_nodes[action_node.parent_node.get_key()] = action_node.parent_node
+            action_node.__children_nodes__.append([ns, child[1], self.normalize(child[2])])
 
 
     def get_actions(self, state_node):

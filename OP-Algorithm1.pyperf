@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<ProfilingTarget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectTarget>
+    <TargetProject>9368bf65-29fe-44d8-8a72-ce347a2f5e4f</TargetProject>
+    <FriendlyName>OP-Algorithm</FriendlyName>
+  </ProjectTarget>
+</ProfilingTarget>

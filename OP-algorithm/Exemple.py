@@ -6,26 +6,26 @@ print("This is an example of usage of OP-Algorithm for Dynamic Pricing, with a p
 
 """WIP"""
 
-MIN_PRICE = 500
+MIN_PRICE = 200
 MAX_PRICE = 1000
 OBSERVED_SALES = 0.5
 OBSERVED_PRICE = 500
 MAX_SALES = 1
-GAMMA = 0.9
-STEP = 200
+GAMMA = 0.95
+STEP = 50
 PRICE_LIST = range(MIN_PRICE, MAX_PRICE, STEP)
 
 
 
 
-initial_state = (1,0,0,0,0,0,0,0,0,0,1,1,1)
+initial_state = (2, 0, 0, 1, 0, 1, 0)
 
 gen = Generator()
 gen.set_normalization(0, MAX_PRICE)
 
 
 def demand_rate(price):
-    return max(min(MAX_SALES - (price/OBSERVED_PRICE)*OBSERVED_SALES,1),0) 
+    return max(min(MAX_SALES - (price/OBSERVED_PRICE)*(1-OBSERVED_SALES),1),0) 
 
 
 
@@ -49,12 +49,20 @@ gen.set_generate_children_function(generate_children_values)
 
                   
 alg = Algo()
-for i in range(1,300,10):
-    alg.set_parameters(gen, initial_state, i, GAMMA, False)
-    res = alg.run(False)
+if False:
+    for i in range(1,100,10):
+        alg.set_parameters(gen, initial_state, i, GAMMA, False)
+        res = alg.run(True)
 
-    print("Resultats: ")
-    print("Action: "+ str(gen.denormalize(res[0].action)))
-    print("Lower Bound: " + str(gen.denormalize(res[1])))
-    print("Upper Bound: " + str(gen.denormalize(res[2])))
+        print("Resultats: ")
+        print("Action: "+ str(gen.denormalize(res[0].action)))
+        print("Lower Bound: " + str(gen.denormalize(res[1])))
+        print("Upper Bound: " + str(gen.denormalize(res[2])))
 
+alg.set_parameters(gen, initial_state, 50, GAMMA, False)
+res = alg.run(False, False)
+
+print("Resultats: ")
+print("Action: "+ str(gen.denormalize(res[0].action)))
+print("Lower Bound: " + str(gen.denormalize(res[1])))
+print("Upper Bound: " + str(gen.denormalize(res[2])))
